@@ -1,14 +1,18 @@
-import subprocess
+import os
 import sys
+import subprocess
 
-# Instalar plotly si no está instalado
-required_packages = ["plotly", "pandas", "streamlit", "matplotlib"]
-for package in required_packages:
-    try:
-        __import__(package)
-    except ImportError:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# Verificar si el entorno virtual ya está creado, si no, lo crea
+VENV_PATH = "./venv"
+if not os.path.exists(VENV_PATH):
+    subprocess.run([sys.executable, "-m", "venv", VENV_PATH])
 
+# Activar el entorno virtual y asegurarse de que las librerías están instaladas
+pip_path = os.path.join(VENV_PATH, "bin", "pip") if sys.platform != "win32" else os.path.join(VENV_PATH, "Scripts", "pip")
+subprocess.run([pip_path, "install", "--upgrade", "pip"])
+subprocess.run([pip_path, "install", "plotly", "pandas", "streamlit", "matplotlib"])
+
+# Importar las librerías después de instalarlas
 import streamlit as st
 import pandas as pd
 import plotly.express as px
