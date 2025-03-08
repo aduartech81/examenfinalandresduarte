@@ -1,7 +1,13 @@
-import os
+import subprocess
+import sys
 
-# Ejecutar el script de instalación antes de importar librerías
-os.system("bash setup.sh")
+# Instalar plotly si no está instalado
+required_packages = ["plotly", "pandas", "streamlit", "matplotlib"]
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 import streamlit as st
 import pandas as pd
