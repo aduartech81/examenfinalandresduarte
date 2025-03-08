@@ -1,5 +1,6 @@
 import os
-os.system("pip install plotly")
+os.system("pip install --upgrade pip")
+os.system("pip install plotly pandas streamlit matplotlib")
 
 import streamlit as st
 import pandas as pd
