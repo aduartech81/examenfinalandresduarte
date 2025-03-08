@@ -1,10 +1,7 @@
 import os
-import subprocess
 
-# Instalar todas las dependencias antes de ejecutar el código
-packages = ["plotly", "pandas", "streamlit", "matplotlib"]
-for package in packages:
-    subprocess.run(["pip", "install", package])
+# Ejecutar el script de instalación antes de importar librerías
+os.system("bash setup.sh")
 
 import streamlit as st
 import pandas as pd
