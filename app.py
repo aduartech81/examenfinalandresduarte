@@ -2,21 +2,17 @@ import os
 import sys
 import subprocess
 
-# Verificar si el entorno virtual ya está creado, si no, lo crea
-VENV_PATH = "./venv"
-if not os.path.exists(VENV_PATH):
-    subprocess.run([sys.executable, "-m", "venv", VENV_PATH])
+# Instalar dependencias antes de importar módulos
+try:
+    import plotly.express as px
+except ModuleNotFoundError:
+    subprocess.run([sys.executable, "-m", "pip", "install", "plotly pandas streamlit matplotlib"], check=True)
+    import plotly.express as px
 
-# Activar el entorno virtual y asegurarse de que las librerías están instaladas
-pip_path = os.path.join(VENV_PATH, "bin", "pip") if sys.platform != "win32" else os.path.join(VENV_PATH, "Scripts", "pip")
-subprocess.run([pip_path, "install", "--upgrade", "pip"])
-subprocess.run([pip_path, "install", "plotly", "pandas", "streamlit", "matplotlib"])
-
-# Importar las librerías después de instalarlas
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import matplotlib.pyplot as plt
+
 
 @st.cache_data
 def load_data():
