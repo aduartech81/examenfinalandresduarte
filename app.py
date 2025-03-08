@@ -1,6 +1,15 @@
+import os
+import subprocess
+
+# Forzar instalación de plotly si no está instalado
+try:
+    import plotly.express as px
+except ModuleNotFoundError:
+    subprocess.run(["pip", "install", "plotly"])
+    import plotly.express as px
+
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
 @st.cache_data
 def load_data():
