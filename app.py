@@ -1,16 +1,6 @@
-import os
-import sys
-import subprocess
-
-# Instalar dependencias antes de importar módulos
-try:
-    import plotly.express as px
-except ModuleNotFoundError:
-    subprocess.run([sys.executable, "-m", "pip", "install", "plotly pandas streamlit matplotlib"], check=True)
-    import plotly.express as px
-
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 import matplotlib.pyplot as plt
 
 
